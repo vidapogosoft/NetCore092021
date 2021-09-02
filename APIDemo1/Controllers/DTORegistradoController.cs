@@ -29,25 +29,25 @@ namespace APIDemo1.Controllers
             return Ok(_IRegistrados.ListRegistrados);
         }
 
-        [HttpGet("{Identificacion}", Name = "Get")]
+        [HttpGet("{Identificacion}", Name = "Get1")]
         public IActionResult GetDatos(string Identificacion)
         {
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
         }
 
-        [HttpGet("{Id}/{Identificacion}", Name = "Get2")]
+        [HttpGet("{Id}/{Identificacion}", Name = "Get22")]
         public IActionResult GetDatos2(int Id, string Identificacion)
         {
             return Ok(_IRegistrados.ListDatoRegistradoById(Id, Identificacion));
         }
 
-        [HttpGet("Datos/{Identificacion}", Name = "Get3")]
+        [HttpGet("Datos/{Identificacion}", Name = "Get33")]
         public IActionResult GetDatosRoute(string Identificacion)
         {
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
         }
 
-        [HttpGet("Datos2/{Identificacion}", Name = "Get4")]
+        [HttpGet("Datos2/{Identificacion}", Name = "Get44")]
         public IActionResult GetDatosRoute2(string Identificacion)
         {
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
