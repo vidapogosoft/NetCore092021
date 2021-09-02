@@ -11,16 +11,17 @@ namespace APIDemo1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegistradoController : ControllerBase
+    public class DTORegistradoController : ControllerBase
     {
 
-        private readonly IRegistrados _IRegistrados;
+        private readonly IDTORegistrados _IRegistrados;
 
-        public RegistradoController(IRegistrados ireg)
+        public DTORegistradoController(IDTORegistrados ireg)
         {
 
             _IRegistrados = ireg;
         }
+
 
         [HttpGet]
         public IActionResult Get()
@@ -51,5 +52,8 @@ namespace APIDemo1.Controllers
         {
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
         }
+
+
+
     }
 }

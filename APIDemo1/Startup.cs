@@ -30,6 +30,7 @@ namespace APIDemo1
             services.AddControllers();
 
             services.AddSingleton<IRegistrados, ServiceRegistrado>();
+            services.AddSingleton<IDTORegistrados, DTOServiceRegistrado>();
 
         }
 

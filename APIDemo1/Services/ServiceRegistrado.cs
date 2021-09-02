@@ -18,5 +18,15 @@ namespace APIDemo1.Services
             get { return data.GetRegistrados();  }
         }
 
+        public IEnumerable<Registrado> ListDatoRegistrado(string Identificacion)
+        {
+            return data.GetDatoRegistradoByIdent(Identificacion);
+        }
+
+        public IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion)
+        {
+            return data.GetDatoRegistradoByIdIdent(IdRegistrado, Identificacion);
+        }
+
     }
 }

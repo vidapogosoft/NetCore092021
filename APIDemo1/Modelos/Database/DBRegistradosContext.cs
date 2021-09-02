@@ -28,35 +28,36 @@ namespace APIDemo1.Modelos.Database
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AI");
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AI");
 
-            modelBuilder.Entity<Registrado>(entity =>
-            {
-                entity.HasKey(e => e.IdRegistrado)
-                    .HasName("PK__Registra__0601106F264631BB");
+        //    modelBuilder.Entity<Registrado>(entity =>
+        //    {
+        //        entity.HasKey(e => e.IdRegistrado)
+        //            .HasName("PK__Registra__0601106F264631BB");
 
-                entity.Property(e => e.Apellidos)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+        //        entity.Property(e => e.Apellidos)
+        //            .HasMaxLength(200)
+        //            .IsUnicode(false);
 
-                entity.Property(e => e.Identificacion)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+        //        entity.Property(e => e.Identificacion)
+        //            .HasMaxLength(20)
+        //            .IsUnicode(false);
 
-                entity.Property(e => e.Nombres)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+        //        entity.Property(e => e.Nombres)
+        //            .HasMaxLength(200)
+        //            .IsUnicode(false);
 
-                entity.Property(e => e.NombresCompletos)
-                    .HasMaxLength(400)
-                    .IsUnicode(false);
-            });
+        //        entity.Property(e => e.NombresCompletos)
+        //            .HasMaxLength(400)
+        //            .IsUnicode(false);
+        //    });
 
-            OnModelCreatingPartial(modelBuilder);
-        }
+        //    OnModelCreatingPartial(modelBuilder);
+        //}
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
     }
 }

@@ -10,6 +10,9 @@ namespace APIDemo1.Interfaces
     public interface IRegistrados
     {
         IEnumerable<Registrado> ListRegistrados { get; }
+        IEnumerable<Registrado> ListDatoRegistrado(string Identificacion);
+
+        IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion);
 
     }
 }

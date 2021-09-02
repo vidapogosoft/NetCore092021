@@ -19,5 +19,26 @@ namespace APIDemo1.DataRepository
 
         }
 
+
+        public List<Registrado> GetDatoRegistradoByIdent(string Identificacion)
+        {
+            using (var context = new DBRegistradosContext())
+            {
+                return context.Registrados.Where(a=> a.Identificacion == Identificacion)
+                    .ToList();
+            }
+
+        }
+
+        public List<Registrado> GetDatoRegistradoByIdIdent(int Id, string Identificacion)
+        {
+            using (var context = new DBRegistradosContext())
+            {
+                return context.Registrados.Where(a => a.IdRegistrado == Id && a.Identificacion == Identificacion)
+                    .ToList();
+            }
+
+        }
+
     }
 }
