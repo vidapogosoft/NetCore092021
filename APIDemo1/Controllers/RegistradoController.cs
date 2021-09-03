@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using APIDemo1.Interfaces;
+using APIDemo1.Modelos.Database;
 
 namespace APIDemo1.Controllers
 {
@@ -51,5 +52,29 @@ namespace APIDemo1.Controllers
         {
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
         }
+
+
+        [HttpPost]
+        public IActionResult Create([FromBody] Registrado NewItem)
+        {
+            try
+            {
+                if (NewItem == null || !ModelState.IsValid)
+                {
+                    return BadRequest("Error: Envio de datos ");
+                }
+
+                //continua con el ingreso de datos
+                _IRegistrados.InsertRegistrado(NewItem);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error:" + ex.Message);
+            }
+
+            return Ok(NewItem);
+        }
+
     }
 }

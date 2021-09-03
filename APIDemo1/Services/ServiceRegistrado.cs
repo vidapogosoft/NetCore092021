@@ -18,6 +18,11 @@ namespace APIDemo1.Services
             get { return data.GetRegistrados();  }
         }
 
+        public void InsertRegistrado(Registrado New)
+        {
+            data.InsertRegistrado(New);
+        }
+
         public IEnumerable<Registrado> ListDatoRegistrado(string Identificacion)
         {
             return data.GetDatoRegistradoByIdent(Identificacion);

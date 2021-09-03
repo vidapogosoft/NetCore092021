@@ -14,5 +14,7 @@ namespace APIDemo1.Interfaces
 
         IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion);
 
+        void InsertRegistrado(Registrado New);
+
     }
 }

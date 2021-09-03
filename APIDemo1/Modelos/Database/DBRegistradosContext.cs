@@ -18,6 +18,7 @@ namespace APIDemo1.Modelos.Database
         }
 
         public virtual DbSet<Registrado> Registrados { get; set; }
+        public virtual DbSet<DTO.DTOResultSet> Result { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
