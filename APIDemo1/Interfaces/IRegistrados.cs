@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using APIDemo1.Modelos.Database;
+using APIDemo1.Modelos.DTO;
 
 namespace APIDemo1.Interfaces
 {
@@ -15,6 +16,10 @@ namespace APIDemo1.Interfaces
         IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion);
 
         void InsertRegistrado(Registrado New);
+        void UpdateRegistrado(Registrado UpdItem);
+        void DeleteRegistrado(Registrado DelItem);
+
+        IEnumerable<DTOResultSet> ListSPRegistrados { get; }
 
     }
 }

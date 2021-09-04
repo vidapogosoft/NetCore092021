@@ -53,6 +53,11 @@ namespace APIDemo1.Controllers
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
         }
 
+        [HttpGet("SP", Name = "GetSP")]
+        public IActionResult GetDatosSP()
+        {
+            return Ok(_IRegistrados.ListSPRegistrados);
+        }
 
         [HttpPost]
         public IActionResult Create([FromBody] Registrado NewItem)
@@ -74,6 +79,50 @@ namespace APIDemo1.Controllers
             }
 
             return Ok(NewItem);
+        }
+
+        [HttpPut]
+        public IActionResult Update([FromBody] Registrado UPDItem)
+        {
+            try
+            {
+                if (UPDItem == null || !ModelState.IsValid)
+                {
+                    return BadRequest("Error: Envio de datos ");
+                }
+
+                //continua con el ingreso de datos
+                _IRegistrados.UpdateRegistrado(UPDItem);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error:" + ex.Message);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete([FromBody] Registrado DelItem)
+        {
+            try
+            {
+                if (DelItem == null || !ModelState.IsValid)
+                {
+                    return BadRequest("Error: Envio de datos ");
+                }
+
+                //continua con el ingreso de datos
+                _IRegistrados.DeleteRegistrado(DelItem);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error:" + ex.Message);
+            }
+
+            return NoContent();
         }
 
     }

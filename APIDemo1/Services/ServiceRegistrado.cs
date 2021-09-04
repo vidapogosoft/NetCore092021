@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using APIDemo1.Interfaces;
 using APIDemo1.Modelos.Database;
+using APIDemo1.Modelos.DTO;
 using APIDemo1.DataRepository;
 
 namespace APIDemo1.Services
@@ -13,14 +14,29 @@ namespace APIDemo1.Services
     {
         public DataRegistrados data = new DataRegistrados();
 
+        public IEnumerable<DTOResultSet> ListSPRegistrados
+        {
+            get { return data.SPCargaRegistrados();  }
+        }
+
         public IEnumerable<Registrado> ListRegistrados
         {
-            get { return data.GetRegistrados();  }
+            get { return data.GetRegistrados(); }
         }
 
         public void InsertRegistrado(Registrado New)
         {
             data.InsertRegistrado(New);
+        }
+
+        public void UpdateRegistrado(Registrado UpdItem)
+        {
+            data.UpdateRegistrado(UpdItem);
+        }
+
+        public void DeleteRegistrado(Registrado DelItem)
+        {
+            data.DeleteRegistrado(DelItem);
         }
 
         public IEnumerable<Registrado> ListDatoRegistrado(string Identificacion)
