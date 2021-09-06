@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 using APIDemo1.Interfaces;
 using APIDemo1.Modelos.Database;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace APIDemo1.Controllers
 {
+
+    //TODO: revisar time del expire
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistradoController : ControllerBase
