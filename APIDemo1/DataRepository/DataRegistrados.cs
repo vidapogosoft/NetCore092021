@@ -47,6 +47,8 @@ namespace APIDemo1.DataRepository
         {
             using (var context = new DBRegistradosContext())
             {
+                NewItem.IdRegistrado = 0;
+
                 context.Registrados.Add(NewItem);
                 context.SaveChanges();
             }
@@ -73,6 +75,7 @@ namespace APIDemo1.DataRepository
                 {
                     foreach(Registrado reg in registrado)
                     {
+                        reg.Nombres = UpdItem.Nombres;
                         reg.Apellidos = UpdItem.Apellidos;
                         reg.NombresCompletos = UpdItem.NombresCompletos;
 
