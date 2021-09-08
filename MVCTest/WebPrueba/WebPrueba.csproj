@@ -125,10 +125,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MantenimientoController.cs" />
+    <Compile Include="Controllers\RegistradoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Productos.cs" />
+    <Compile Include="Models\Registrado.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +173,10 @@
     <Content Include="Views\Mantenimiento\Create.cshtml" />
     <Content Include="Views\Mantenimiento\Edit.cshtml" />
     <Content Include="Views\Mantenimiento\Delete.cshtml" />
+    <Content Include="Views\Registrado\Index.cshtml" />
+    <Content Include="Views\Registrado\Create.cshtml" />
+    <Content Include="Views\Registrado\Details.cshtml" />
+    <Content Include="Views\Registrado\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -206,7 +212,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51882</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44374/</IISUrl>
+          <IISUrl>http://localhost:44374/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
