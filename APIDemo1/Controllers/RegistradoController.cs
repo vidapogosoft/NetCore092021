@@ -14,7 +14,7 @@ namespace APIDemo1.Controllers
 {
 
     //TODO: revisar time del expire
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistradoController : ControllerBase
