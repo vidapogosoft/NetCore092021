@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-using BLWA1.Repositorio,
+using BLWA1.Repositorio;
 
 namespace BLWA1
 {
