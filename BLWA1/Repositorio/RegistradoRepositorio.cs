@@ -40,6 +40,18 @@ namespace BLWA1.Repositorio
             }
         }
 
+        public async Task<HttpResponseWrapper<object>>PostRegistrado<T>(string url, T enviar)
+        {
+            var enviarJson = JsonSerializer.Serialize(enviar);
+
+            var enviarContent = new StringContent(enviarJson, Encoding.UTF8, "application/json");
+
+            var responseHTTP = await httpClient.PostAsync(url, enviarContent);
+
+            return new HttpResponseWrapper<object>(null, !responseHTTP.IsSuccessStatusCode, responseHTTP);
+
+        }
+
 
         private async Task<T> DeserializarRespuesta<T>(HttpResponseMessage httpResponse, JsonSerializerOptions jsonSerializerOptions)
         {
