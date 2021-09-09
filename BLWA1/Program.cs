@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using BLWA1.Repositorio,
+
 namespace BLWA1
 {
     public class Program
@@ -21,5 +23,11 @@ namespace BLWA1
 
             await builder.Build().RunAsync();
         }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddScoped<IRegistradoRepositorio, RegistradoRepositorio>();
+        }
+
     }
 }

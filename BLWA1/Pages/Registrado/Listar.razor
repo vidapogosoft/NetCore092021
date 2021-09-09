@@ -34,22 +34,20 @@ else
         </thead>
         <tbody>
             @foreach (var x in registrados)
-           {
-            <tr>
-                <td>@x.IdRegistrado</td>
-                <td>@x.Identificacion</td>
-                <td>@x.Nombres</td>
-                <td>@x.Apellidos</td>
-                <td>@x.NombresCompletos</td>
-                <td><a href="/registrado/actualizar/@x.Identificacion" class="oi oi-pencil"  ></a></td>
-                <td><a @onclick="@(() => Eliminar(x))" class="oi oi-trash"></a></td>
-            </tr>
+            {
+                <tr>
+                    <td>@x.IdRegistrado</td>
+                    <td>@x.Identificacion</td>
+                    <td>@x.Nombres</td>
+                    <td>@x.Apellidos</td>
+                    <td>@x.NombresCompletos</td>
+                    <td><a href="/registrado/actualizar/@x.Identificacion" class="oi oi-pencil"></a></td>
+                    <td><a @onclick="@(() => Eliminar(x))" class="oi oi-trash"></a></td>
+                </tr>
 
             }
         </tbody>
     </table>
-
-
 
 }
 
@@ -57,6 +55,7 @@ else
 @code {
 
     public List<Model.Registrado> registrados { get; set; }
+
 
     //OnInitializedAsync()
     protected override async Task OnInitializedAsync()
@@ -67,7 +66,7 @@ else
 
     private async Task CargarDatos()
     {
-        var responseHttp = await repo.GetRegistrados<List<Model.Registrado>>($"http://localhost/apidemo/api/Registrado");
+        var responseHttp = await repo.GetRegistrados<List<Model.Registrado>>("http://localhost/apidemo/api/Registrado");
 
         if (!responseHttp.Error)
         {
@@ -75,9 +74,10 @@ else
         }
     }
 
-    public async Task Eliminar (Model.Registrado del)
+    public async Task Eliminar(Model.Registrado del)
     {
 
     }
 
 }
+
