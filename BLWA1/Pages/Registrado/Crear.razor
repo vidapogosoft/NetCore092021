@@ -1,22 +1,22 @@
 ﻿@page "/registrado/crear"
 @inject NavigationManager nm
 @inject Repositorio.RegistradoRepositorio  repo
-@inject IJSRuntime js
+
 
 <div style="text-align:center">
     <h3>Registrados: Registro de Datos</h3>
 </div>
 
-<FormularioRegistrado OnValidSubmit="CrearRegistrado"></FormularioRegistrado>
+<FormularioRegistrado OnValidSubmit="CrearRegistrado"  registrado="NewRegistrado"></FormularioRegistrado>
 
 @code {
 
-    private Model.Registrado registrado = new Model.Registrado();
+    private Model.Registrado NewRegistrado = new Model.Registrado();
 
     private async Task CrearRegistrado()
     {
 
-        var httpResponse = await repo.PostRegistrado("http://localhost/apidemo/api/Registrado", registrado);
+        var httpResponse = await repo.PostRegistrado("http://localhost/apidemo/api/Registrado", NewRegistrado);
 
         if (httpResponse.Error)
         {
