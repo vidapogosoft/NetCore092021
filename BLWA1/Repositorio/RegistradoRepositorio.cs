@@ -53,6 +53,25 @@ namespace BLWA1.Repositorio
         }
 
 
+        public async Task<HttpResponseWrapper<object>> PutRegistrado<T>(string url, T enviar)
+        {
+            var enviarJson = JsonSerializer.Serialize(enviar);
+
+            var enviarContent = new StringContent(enviarJson, Encoding.UTF8, "application/json");
+
+            var responseHTTP = await httpClient.PutAsync(url, enviarContent);
+
+            return new HttpResponseWrapper<object>(null, !responseHTTP.IsSuccessStatusCode, responseHTTP);
+
+        }
+
+        public async Task<HttpResponseWrapper<object> >DeleteRegistrado (string url)
+        {
+            var responseHTTP = await httpClient.DeleteAsync(url);
+            return new HttpResponseWrapper<object>(null, !responseHTTP.IsSuccessStatusCode, responseHTTP);
+        }
+
+
         private async Task<T> DeserializarRespuesta<T>(HttpResponseMessage httpResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             var responseString = await httpResponse.Content.ReadAsStringAsync();

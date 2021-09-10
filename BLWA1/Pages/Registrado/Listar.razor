@@ -41,8 +41,8 @@ else
                     <td>@x.Nombres</td>
                     <td>@x.Apellidos</td>
                     <td>@x.NombresCompletos</td>
-                    <td><a href="/registrado/actualizar/@x.Identificacion" class="oi oi-pencil"></a></td>
-                    <td><a @onclick="@(() => Eliminar(x))" class="oi oi-trash"></a></td>
+                    <td><a href="/registrado/actualizar/@x.IdRegistrado" class="oi oi-pencil"></a></td>
+                    <td><button @onclick="@(() => Eliminar(x.IdRegistrado))" class="oi oi-trash"></button></td>
                 </tr>
 
             }
@@ -74,8 +74,18 @@ else
         }
     }
 
-    public async Task Eliminar(Model.Registrado del)
+    public async Task Eliminar(int IdRegistrado)
     {
+
+        var responseHTTP = await repo.DeleteRegistrado("http://localhost/apidemo/api/Registrado/" + IdRegistrado);
+        if (responseHTTP.Error)
+        {
+            nm.NavigateTo("/registrado/listar");
+        }
+        else
+        {
+            await CargarDatos();
+        }
 
     }
 

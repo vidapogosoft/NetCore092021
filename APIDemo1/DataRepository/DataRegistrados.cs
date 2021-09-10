@@ -33,6 +33,17 @@ namespace APIDemo1.DataRepository
 
         }
 
+        public Registrado GetDatoRegistradoById(int IdRegistrado)
+        {
+            using (var context = new DBRegistradosContext())
+            {
+                return context.Registrados.Where(a => a.IdRegistrado == IdRegistrado)
+                    .FirstOrDefault();
+            }
+
+        }
+
+
         public List<Registrado> GetDatoRegistradoByIdIdent(int Id, string Identificacion)
         {
             using (var context = new DBRegistradosContext())
@@ -106,6 +117,23 @@ namespace APIDemo1.DataRepository
                 }
 
             }
+        }
+
+        public void DeleteRegistrado2(int IdRegistrado)
+        {
+            using (var context = new DBRegistradosContext())
+            {
+
+                var registrado = context.Registrados.Where(a => a.IdRegistrado == IdRegistrado).FirstOrDefault();
+
+                if (registrado != null)
+                {
+                    context.Remove(registrado);
+                    context.SaveChanges();
+                }
+
+            }
+
         }
 
         public List<DTOResultSet> SPCargaRegistrados()

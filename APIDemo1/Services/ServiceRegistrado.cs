@@ -43,10 +43,22 @@ namespace APIDemo1.Services
             data.DeleteRegistrado(DelItem);
         }
 
+        public void DeleteRegistrado2(int IdRegistrado)
+        {
+            data.DeleteRegistrado2(IdRegistrado);
+        }
+
+
         public IEnumerable<Registrado> ListDatoRegistrado(string Identificacion)
         {
             return data.GetDatoRegistradoByIdent(Identificacion);
         }
+
+        public Registrado ListDatoRegistrado2(int IdRegistrado)
+        {
+            return data.GetDatoRegistradoById(IdRegistrado);
+        }
+
 
         public IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion)
         {
