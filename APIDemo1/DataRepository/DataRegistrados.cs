@@ -73,6 +73,8 @@ namespace APIDemo1.DataRepository
                 {
                     foreach(Registrado reg in registrado)
                     {
+                        reg.Identificacion = UpdItem.Identificacion;
+                        reg.Nombres = UpdItem.Nombres;
                         reg.Apellidos = UpdItem.Apellidos;
                         reg.NombresCompletos = UpdItem.NombresCompletos;
 
@@ -94,6 +96,8 @@ namespace APIDemo1.DataRepository
 
                 if (registrado != null)
                 {
+                    registrado.Identificacion = UpdItem.Identificacion;
+                    registrado.Nombres = UpdItem.Nombres;
                     registrado.Apellidos = UpdItem.Apellidos;
                     registrado.NombresCompletos  = UpdItem.NombresCompletos;
 

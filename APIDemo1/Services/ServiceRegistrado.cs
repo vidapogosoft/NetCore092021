@@ -26,11 +26,15 @@ namespace APIDemo1.Services
 
         public void InsertRegistrado(Registrado New)
         {
+            New.NombresCompletos = New.Nombres + ' ' + New.Apellidos;
+
             data.InsertRegistrado(New);
         }
 
         public void UpdateRegistrado(Registrado UpdItem)
         {
+            UpdItem.NombresCompletos = UpdItem.Nombres + ' ' + UpdItem.Apellidos;
+
             data.UpdateRegistrado(UpdItem);
         }
 

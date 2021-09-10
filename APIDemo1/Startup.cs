@@ -41,8 +41,13 @@ namespace APIDemo1
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://example.com",
-                                                          "http://localhost:18445");
+                                      //builder.WithOrigins("http://example.com",
+                                      //                    "http://localhost:18445");
+                                      builder.WithOrigins("http://localhost:18445","http://localhost:18445/registrado/listar", 
+                                          "http://localhost:18445/registrado/crear", "http://localhost:18445/registrado/actualizar")
+                                      .AllowAnyOrigin()  
+                                      .AllowAnyHeader()
+                                       .AllowAnyMethod();
                                   });
             });
 
