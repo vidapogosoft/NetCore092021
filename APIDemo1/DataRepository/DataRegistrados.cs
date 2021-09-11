@@ -33,6 +33,17 @@ namespace APIDemo1.DataRepository
 
         }
 
+        public Registrado GetDatoRegistradoById(int IdRegistrado)
+        {
+            using (var context = new DBRegistradosContext())
+            {
+                return context.Registrados.Where(a => a.IdRegistrado == IdRegistrado)
+                    .FirstOrDefault();
+            }
+
+        }
+
+
         public List<Registrado> GetDatoRegistradoByIdIdent(int Id, string Identificacion)
         {
             using (var context = new DBRegistradosContext())
@@ -47,8 +58,6 @@ namespace APIDemo1.DataRepository
         {
             using (var context = new DBRegistradosContext())
             {
-                NewItem.IdRegistrado = 0;
-
                 context.Registrados.Add(NewItem);
                 context.SaveChanges();
             }
@@ -75,6 +84,7 @@ namespace APIDemo1.DataRepository
                 {
                     foreach(Registrado reg in registrado)
                     {
+                        reg.Identificacion = UpdItem.Identificacion;
                         reg.Nombres = UpdItem.Nombres;
                         reg.Apellidos = UpdItem.Apellidos;
                         reg.NombresCompletos = UpdItem.NombresCompletos;
@@ -97,6 +107,8 @@ namespace APIDemo1.DataRepository
 
                 if (registrado != null)
                 {
+                    registrado.Identificacion = UpdItem.Identificacion;
+                    registrado.Nombres = UpdItem.Nombres;
                     registrado.Apellidos = UpdItem.Apellidos;
                     registrado.NombresCompletos  = UpdItem.NombresCompletos;
 
@@ -105,6 +117,23 @@ namespace APIDemo1.DataRepository
                 }
 
             }
+        }
+
+        public void DeleteRegistrado2(int IdRegistrado)
+        {
+            using (var context = new DBRegistradosContext())
+            {
+
+                var registrado = context.Registrados.Where(a => a.IdRegistrado == IdRegistrado).FirstOrDefault();
+
+                if (registrado != null)
+                {
+                    context.Remove(registrado);
+                    context.SaveChanges();
+                }
+
+            }
+
         }
 
         public List<DTOResultSet> SPCargaRegistrados()

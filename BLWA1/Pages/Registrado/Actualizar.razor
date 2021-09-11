@@ -1,0 +1,42 @@
+﻿@page "/registrado/actualizar/{IdRegistrado:int}"
+@inject NavigationManager nm
+@inject Repositorio.RegistradoRepositorio  repo
+
+
+<div class="form-group mx-sm-3 mb-2" style="text-align:center">
+    <h3>Editar Datos de registrado</h3>
+</div>
+
+@if (registradoEdit == null)
+{
+    <span>CARGANDO......</span>
+}
+else
+{
+    <FormularioRegistrado  registrado="registradoEdit"></FormularioRegistrado>
+}
+
+
+@code {
+
+    [Parameter] public int IdRegistrado { get; set; }
+
+    private Model.Registrado registradoEdit;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        var httResponse = await repo.GetRegistrados<Model.Registrado>("http://localhost/apidemo/api/Registrado/Datos2/" + IdRegistrado);
+
+        if (httResponse.Error)
+        {
+            nm.NavigateTo("registrado/listar");
+        }
+
+        registradoEdit = httResponse.Response;
+
+    }
+
+
+}

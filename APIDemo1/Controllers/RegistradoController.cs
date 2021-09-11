@@ -52,10 +52,10 @@ namespace APIDemo1.Controllers
             return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
         }
 
-        [HttpGet("Datos2/{Identificacion}", Name = "Get4")]
-        public IActionResult GetDatosRoute2(string Identificacion)
+        [HttpGet("Datos2/{IdRegistrado}", Name = "Get4")]
+        public IActionResult GetDatosRoute2(int IdRegistrado)
         {
-            return Ok(_IRegistrados.ListDatoRegistrado(Identificacion));
+            return Ok(_IRegistrados.ListDatoRegistrado2(IdRegistrado));
         }
 
         [HttpGet("SP", Name = "GetSP")]
@@ -108,18 +108,14 @@ namespace APIDemo1.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
-        public IActionResult Delete([FromBody] Registrado DelItem)
+        [HttpDelete("{IdRegistrado}")]
+        public IActionResult Delete(int IdRegistrado)
         {
             try
             {
-                if (DelItem == null || !ModelState.IsValid)
-                {
-                    return BadRequest("Error: Envio de datos ");
-                }
-
+               
                 //continua con el ingreso de datos
-                _IRegistrados.DeleteRegistrado(DelItem);
+                _IRegistrados.DeleteRegistrado2(IdRegistrado);
 
             }
             catch (Exception ex)
@@ -129,6 +125,28 @@ namespace APIDemo1.Controllers
 
             return NoContent();
         }
+
+        //[HttpDelete]
+        //public IActionResult Delete([FromBody] Registrado DelItem)
+        //{
+        //    try
+        //    {
+        //        if (DelItem == null || !ModelState.IsValid)
+        //        {
+        //            return BadRequest("Error: Envio de datos ");
+        //        }
+
+        //        //continua con el ingreso de datos
+        //        _IRegistrados.DeleteRegistrado(DelItem);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("Error:" + ex.Message);
+        //    }
+
+        //    return NoContent();
+        //}
 
     }
 }

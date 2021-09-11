@@ -1,0 +1,93 @@
+﻿@page "/registrado/listar"
+@inject NavigationManager nm
+@inject Repositorio.RegistradoRepositorio  repo
+
+<div style="text-align:center">
+    <h3>Registrados</h3>
+</div>
+<div style="margin: 0px 0px 10px 0px" class="form-group">
+    <a class="btn btn-primary" href="registrado/crear"><i class="oi oi-plus"></i> Agregar Nuevo</a>
+</div>
+
+@if (registrados == null)
+{
+    <span>CARGANDO......</span>
+}
+else if (registrados.Count == 0)
+{
+    <span>NO EXISTEN REGISTROS EN LA BASE DE DATOS</span>
+}
+else
+{
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">IdRegistrado</th>
+                <th scope="col">Identificacion</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">NombresCompletos</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in registrados)
+            {
+                <tr>
+                    <td>@x.IdRegistrado</td>
+                    <td>@x.Identificacion</td>
+                    <td>@x.Nombres</td>
+                    <td>@x.Apellidos</td>
+                    <td>@x.NombresCompletos</td>
+                    <td><a href="/registrado/actualizar/@x.IdRegistrado" class="oi oi-pencil"></a></td>
+                    <td><button @onclick="@(() => Eliminar(x.IdRegistrado))" class="oi oi-trash"></button></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+
+    public List<Model.Registrado> registrados { get; set; }
+
+
+    //OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarDatos();
+    }
+
+
+    private async Task CargarDatos()
+    {
+        var responseHttp = await repo.GetRegistrados<List<Model.Registrado>>("http://localhost/apidemo/api/Registrado");
+
+        if (!responseHttp.Error)
+        {
+            registrados = responseHttp.Response;
+        }
+    }
+
+    public async Task Eliminar(int IdRegistrado)
+    {
+
+        var responseHTTP = await repo.DeleteRegistrado("http://localhost/apidemo/api/Registrado/" + IdRegistrado);
+        if (responseHTTP.Error)
+        {
+            nm.NavigateTo("/registrado/listar");
+        }
+        else
+        {
+            await CargarDatos();
+        }
+
+    }
+
+}
+

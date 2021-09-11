@@ -1,0 +1,37 @@
+﻿@page "/registrado/crear"
+@inject NavigationManager nm
+@inject Repositorio.RegistradoRepositorio  repo
+
+
+<div style="text-align:center">
+    <h3>Registrados: Registro de Datos</h3>
+</div>
+
+<FormularioRegistrado OnValidSubmit="CrearRegistrado"  registrado="NewRegistrado"></FormularioRegistrado>
+
+@code {
+
+    private Model.Registrado NewRegistrado = new Model.Registrado();
+
+    private async Task CrearRegistrado()
+    {
+
+        var httpResponse = await repo.PostRegistrado("http://localhost/apidemo/api/Registrado", NewRegistrado);
+
+        if (httpResponse.Error)
+        {
+            var body = await httpResponse.HttpResponseMessage.Content.ReadAsStringAsync();
+
+            Console.WriteLine(body);
+
+            nm.NavigateTo("/registrado/crear");
+        }
+        else
+        {
+            nm.NavigateTo("/registrado/listar");
+        }
+
+    }
+
+
+}

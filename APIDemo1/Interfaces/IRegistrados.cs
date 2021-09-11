@@ -13,11 +13,14 @@ namespace APIDemo1.Interfaces
         IEnumerable<Registrado> ListRegistrados { get; }
         IEnumerable<Registrado> ListDatoRegistrado(string Identificacion);
 
+        Registrado ListDatoRegistrado2(int IdRegistardo);
+
         IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion);
 
         void InsertRegistrado(Registrado New);
         void UpdateRegistrado(Registrado UpdItem);
         void DeleteRegistrado(Registrado DelItem);
+        void DeleteRegistrado2(int IdRegistrado);
 
         IEnumerable<DTOResultSet> ListSPRegistrados { get; }
 

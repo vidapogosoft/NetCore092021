@@ -26,11 +26,15 @@ namespace APIDemo1.Services
 
         public void InsertRegistrado(Registrado New)
         {
+            New.NombresCompletos = New.Nombres + ' ' + New.Apellidos;
+
             data.InsertRegistrado(New);
         }
 
         public void UpdateRegistrado(Registrado UpdItem)
         {
+            UpdItem.NombresCompletos = UpdItem.Nombres + ' ' + UpdItem.Apellidos;
+
             data.UpdateRegistrado(UpdItem);
         }
 
@@ -39,10 +43,22 @@ namespace APIDemo1.Services
             data.DeleteRegistrado(DelItem);
         }
 
+        public void DeleteRegistrado2(int IdRegistrado)
+        {
+            data.DeleteRegistrado2(IdRegistrado);
+        }
+
+
         public IEnumerable<Registrado> ListDatoRegistrado(string Identificacion)
         {
             return data.GetDatoRegistradoByIdent(Identificacion);
         }
+
+        public Registrado ListDatoRegistrado2(int IdRegistrado)
+        {
+            return data.GetDatoRegistradoById(IdRegistrado);
+        }
+
 
         public IEnumerable<Registrado> ListDatoRegistradoById(int IdRegistrado, string Identificacion)
         {

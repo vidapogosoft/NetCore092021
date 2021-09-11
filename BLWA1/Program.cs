@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using BLWA1.Repositorio;
+
 namespace BLWA1
 {
     public class Program
@@ -19,7 +21,17 @@ namespace BLWA1
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+            ConfigureServices(builder.Services);
+
+            builder.Services.AddScoped<RegistradoRepositorio>();
+
             await builder.Build().RunAsync();
         }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddScoped<IRegistradoRepositorio, RegistradoRepositorio>();
+        }
+
     }
 }

@@ -22,7 +22,7 @@
       }
     },
     "APIDemo1": {
-      "commandName": "IIS",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "environmentVariables": {

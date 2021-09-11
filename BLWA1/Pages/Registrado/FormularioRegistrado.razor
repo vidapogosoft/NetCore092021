@@ -1,0 +1,66 @@
+﻿@inject NavigationManager nm
+@inject Repositorio.RegistradoRepositorio  repo
+
+
+<h3>Formualrio de Registro de Datos</h3>
+
+<EditForm Model="registrado" OnValidSubmit="OnValidSubmit">
+
+    <DataAnnotationsValidator />
+
+    <div>
+        <div class="form-group mx-sm-3 mb-2">
+            <label>Identificacion:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@registrado.Identificacion"></InputText>
+                <ValidationMessage For="@(() => registrado.Identificacion)" />
+            </div>
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label>Nombres:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@registrado.Nombres"></InputText>
+                <ValidationMessage For="@(() => registrado.Nombres)" />
+            </div>
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label>Apellidos:</label>
+            <div>
+                <InputText class="form-control" @bind-Value="@registrado.Apellidos"></InputText>
+                <ValidationMessage For="@(() => registrado.Apellidos)" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div class="form-group mx-sm-3 mb-2">
+                <button class="btn btn-success" type="submit">Registrar</button>
+                <button class="btn btn-danger" type="button" @onclick="Cancelar">Cancelar</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</EditForm>
+
+
+
+@code {
+
+    [Parameter] public Model.Registrado registrado { get; set; }
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    private void Cancelar()
+    {
+        nm.NavigateTo("registrado/listar");
+    }
+
+
+}
