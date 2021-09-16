@@ -25,7 +25,7 @@ namespace APIDemo1.Modelos.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("User= sa; Password= Ctek2314;Persist Security Info=False;Initial Catalog=DBRegistrados;Data Source=(local)\\S19");
+                optionsBuilder.UseSqlServer("User= usertest; Password= Sistemas2021;Persist Security Info=False;Initial Catalog=DBRegistrados;Data Source=SRV01967.deprati.com");
             }
         }
 

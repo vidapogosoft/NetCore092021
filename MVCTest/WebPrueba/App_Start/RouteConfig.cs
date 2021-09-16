@@ -16,7 +16,7 @@ namespace WebPrueba
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Mantenimiento", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Registrado", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

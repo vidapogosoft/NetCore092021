@@ -27,7 +27,7 @@ namespace APIDemo1.Controllers
 
             _IRegistrados = ireg;
         }
-
+        
         [HttpGet]
         public IActionResult Get()
         {
