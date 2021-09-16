@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using APIDemo1.Services;
 using APIDemo1.Interfaces;
 
+using Microsoft.OpenApi.Models;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -79,6 +80,13 @@ namespace APIDemo1
                 }
                 );
 
+
+            services.AddSwaggerGen(c =>
+
+                   c.SwaggerDoc("v1", new OpenApiInfo { Title = "Demo de Talleres", Version = "beta" } )
+
+                );
+
             services.AddAuthorization();
 
             services.AddSingleton<IJwtAuthenticationService>(new JwtAuthenticationService(key));
@@ -99,6 +107,14 @@ namespace APIDemo1
             app.UseRouting();
 
             app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+
+                  c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mi api beta demo")
+
+               );
 
             //llamo al middleware de la autenticacion
             app.UseAuthentication();
