@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Catalogo.Persistence.Database;
 using Catalogo.Services.Queries.DTOs;
 
 using Microsoft.EntityFrameworkCore;
+using Services.Common.Collection;
+using Services.Common.Mapping;
+using Services.Common.Paging;
 
 namespace Catalogo.Services.Queries
 {
     public interface IProductQueryService
     {
-        Task<DataCollection<ProductDto>> GetAllAsync(int page, int take, IEnumerable<int> products = null);
+        Task<DataCollection<ProductDto>> GetAllAsync(int page, int take, 
+            IEnumerable<int> products = null);
         Task<ProductDto> GetAsync(int id);
     }
 
@@ -26,7 +30,17 @@ namespace Catalogo.Services.Queries
             _context = context;
         }
 
+        public async Task<DataCollection<ProductDto>> GetAllAsync(int page, int take, 
+            IEnumerable<int> products = null)
+        {
+            var collection = await _context.Products
+                .Where(x => products == null || products.Contains(x.ProductId))
+                .OrderBy(x => x.Name)
+                .GetPagedAsync(page, take);
 
+            return collection.MapTo<DataCollection<ProductDto>>();
+
+        }
 
         public async Task<ProductDto> GetAsync(int id)
         {
