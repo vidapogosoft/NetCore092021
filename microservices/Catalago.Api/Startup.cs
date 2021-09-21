@@ -12,6 +12,14 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 using Catalogo.Persistence.Database;
+using Catalogo.Services.Queries;
+using Common.Logging;
+using HealthChecks.UI.Client;
+using MediatR;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace Catalago.Api
 {
@@ -35,15 +43,39 @@ namespace Catalago.Api
                 )
             );
 
+
+            //health Checks
+
+            services.AddHealthChecks()
+                .AddCheck("api.catalogo", () => HealthCheckResult.Healthy())
+                .AddDbContextCheck<ApplicationDbContext>(typeof(ApplicationDbContext).Name);
+
+
+            services.AddHealthChecksUI();
+
+            // Event handlers
+            services.AddMediatR(Assembly.Load("Catalogo.Services.EventHandlers"));
+
+            //Query Services
+            services.AddTransient<IProductQueryService, ProductQueryService>();
+            
+
             services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env
+            , ILoggerFactory loggerFactory
+            )
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                loggerFactory.AddSyslog(
+                    Configuration.GetValue<string>("Papertrail:host"),
+                    Configuration.GetValue<int>("Papertrail:port"));
+
             }
 
             app.UseRouting();
@@ -53,6 +85,14 @@ namespace Catalago.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecksUI();
+
             });
         }
     }

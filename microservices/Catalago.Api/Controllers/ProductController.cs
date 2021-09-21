@@ -36,6 +36,9 @@ namespace Catalago.Api.Controllers
         [HttpGet]
         public async Task<DataCollection<ProductDto>> GetAll(int page = 1, int take = 10, string ids = null)
         {
+
+            _logger.LogInformation("--- Consulta sin filtro de registros");
+
             IEnumerable<int> products = null;
 
             if (!string.IsNullOrEmpty(ids))
@@ -49,12 +52,14 @@ namespace Catalago.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ProductDto> Get (int id)
         {
+            _logger.LogInformation("--- Consulta de registros con el parametro:" + id );
             return await _productQueryService.GetAsync(id);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create (ProductCreateCommand notification)
         {
+            _logger.LogInformation("--- Creacion de registros");
 
             await _mediator.Publish(notification);
 
