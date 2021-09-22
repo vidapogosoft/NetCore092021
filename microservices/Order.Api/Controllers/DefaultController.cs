@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Catalago.Api.Controllers
+namespace Order.Api.Controllers
 {
     [Route("/")]
     [ApiController]
@@ -14,9 +14,7 @@ namespace Catalago.Api.Controllers
         [HttpGet]
         public string Index()
         {
-            return "Running Catalogo.Api....";
+            return "Running Order.Api....";
         }
-
-
     }
 }
