@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Catalogo.Persistence.Database\Catalogo.Persistence.Database.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
-  </ItemGroup>
-
 </Project>
