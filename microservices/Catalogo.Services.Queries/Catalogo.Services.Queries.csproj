@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Catalogo.Persistence.Database\Catalogo.Persistence.Database.csproj" />
+    <ProjectReference Include="..\Services.Common.Mapping\Services.Common.Mapping.csproj" />
+    <ProjectReference Include="..\Services.Common.Paging\Services.Common.Paging.csproj" />
+  </ItemGroup>
+
+</Project>
