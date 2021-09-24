@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Logging\Common.Logging.csproj" />
-    <ProjectReference Include="..\Identity.Persistence.Database\Identity.Persistence.Database.csproj" />
+    <ProjectReference Include="..\Identity.Service.EventHandlers\Identity.Service.EventHandlers.csproj" />
   </ItemGroup>
 
 
