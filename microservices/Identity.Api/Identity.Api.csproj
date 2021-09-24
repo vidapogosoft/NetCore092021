@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\Identity.Service.EventHandlers\Identity.Service.EventHandlers.csproj" />
+    <ProjectReference Include="..\Identity.Service.Queries\Identity.Service.Queries.csproj" />
   </ItemGroup>
 
 
