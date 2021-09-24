@@ -10,9 +10,12 @@ using Services.Common.Collection;
 using Customer.Service.Queries;
 using Customer.Service.Queries.DTOs;
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Customer.Api.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("v1/clientes")]
     [ApiController]
     public class ClientController : ControllerBase

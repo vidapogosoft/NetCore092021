@@ -21,6 +21,10 @@ using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 namespace Catalago.Api
 {
     public class Startup
@@ -61,6 +65,25 @@ namespace Catalago.Api
             
 
             services.AddControllers();
+
+            // Add Authentication
+            var secretKey = Encoding.ASCII.GetBytes(
+                Configuration.GetValue<string>("SecretKey")
+            );
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,6 +104,7 @@ namespace Catalago.Api
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
