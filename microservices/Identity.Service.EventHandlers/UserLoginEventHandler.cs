@@ -49,13 +49,18 @@ namespace Identity.Service.EventHandlers
 
             var user = await _context.Users.SingleAsync(x => x.Email == notification.Email);
 
-            var response = await _signInManager.CheckPasswordSignInAsync(user, notification.Password, false);
-
-            if (response.Succeeded)
+            if (user != null)
             {
-                result.Succeeded = true;
-                await GenerateToken( user, result);
+                var response = await _signInManager.CheckPasswordSignInAsync(user, notification.Password, false);
+
+                if (response.Succeeded)
+                {
+                    result.Succeeded = true;
+                    await GenerateToken(user, result);
+                }
+
             }
+
 
             return result;
 

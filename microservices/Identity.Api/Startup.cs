@@ -2,6 +2,7 @@ using Common.Logging;
 using HealthChecks.UI.Client;
 using Identity.Domain;
 using Identity.Persistence.Database;
+using Identity.Service.Queries;
 
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -51,6 +52,16 @@ namespace Identity.Api
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
+            //health Checks
+
+            services.AddHealthChecks()
+                .AddCheck("api.Identity", () => HealthCheckResult.Healthy())
+                .AddDbContextCheck<ApplicationDbContext>(typeof(ApplicationDbContext).Name);
+
+            services.AddHealthChecksUI();
+
+
             // Identity configuration
             services.Configure<IdentityOptions>(options =>
             {
@@ -65,6 +76,11 @@ namespace Identity.Api
 
             // Event handlers
             services.AddMediatR(Assembly.Load("Identity.Service.EventHandlers"));
+
+
+            // Query services
+            services.AddTransient<IUserQueryService, UserQueryService>();
+
 
             services.AddControllers();
 

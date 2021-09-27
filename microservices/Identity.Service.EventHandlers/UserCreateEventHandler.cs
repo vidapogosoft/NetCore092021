@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Identity.Service.EventHandlers
 {
-    public class UserCreateEventHandler
+    public class UserCreateEventHandler :
+        IRequestHandler<UserCreateCommand, IdentityResult>
     {
 
         private readonly UserManager<ApplicationUser> _userManager;
