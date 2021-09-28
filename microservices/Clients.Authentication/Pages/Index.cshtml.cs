@@ -25,6 +25,7 @@ namespace Clients.Authentication.Pages
         [BindProperty]
         public LoginViewModel model { get; set; }
 
+        [BindProperty(SupportsGet = true)]
         public string ReturnBaseUrl { get; set; }
 
         public IndexModel(
@@ -71,7 +72,7 @@ namespace Clients.Authentication.Pages
                 );
 
 
-                return Redirect(ReturnBaseUrl + $"xxxxxxxxxxxx={result.AccessToken}");
+                return Redirect(ReturnBaseUrl + $"account/connect?access_token={result.AccessToken}");
 
             }
         }
