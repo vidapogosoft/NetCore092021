@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Customer.Api.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("v1/clientes")]
+    [Route("v1/clients")]
     [ApiController]
     public class ClientController : ControllerBase
     {
