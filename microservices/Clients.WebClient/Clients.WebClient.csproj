@@ -8,4 +8,13 @@
     <Folder Include="Proxies\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Api.Gateway.Models">
+      <HintPath>Proxies\Api.Gateway.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Api.Gateway.WebClient.Proxy">
+      <HintPath>Proxies\Api.Gateway.WebClient.Proxy.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
