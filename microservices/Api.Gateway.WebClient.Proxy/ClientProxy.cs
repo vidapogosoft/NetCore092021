@@ -41,7 +41,7 @@ namespace Api.Gateway.WebClient.Proxy
 
         public async Task<DataCollection<ClientDto>> GetAllAsync(int page, int take)
         {
-            var request = await _httpClient.GetAsync($"{_apiGatewayUrl}clientes?page={page}&take={take}");
+            var request = await _httpClient.GetAsync($"{_apiGatewayUrl}clients?page={page}&take={take}");
             request.EnsureSuccessStatusCode();
 
             return JsonSerializer.Deserialize<DataCollection<ClientDto>>(

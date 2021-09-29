@@ -19,6 +19,8 @@ namespace Api.Gateway.WebClient.Proxy
     public interface IOrderProxy
     {
         Task<DataCollection<OrderDto>> GetAllAsync(int page, int take);
+        Task<OrderDto> GetAsync(int id);
+        Task CreateAsync(OrderCreateCommand command);
     }
 
     public class OrderProxy: IOrderProxy

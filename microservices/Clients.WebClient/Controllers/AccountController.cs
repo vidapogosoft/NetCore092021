@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
-
+using Clients.WebClient.Models;
 
 namespace Clients.WebClient.Controllers
 {
@@ -31,14 +31,46 @@ namespace Clients.WebClient.Controllers
         [HttpGet]
         public async Task<IActionResult> Connect(string access_token)
         {
-            var token = access_token.Split('.');
+            //var token = access_token.Split('.');
+
+            //var base64Content = Convert.FromBase64String(token[1]);
+
+            //var user = JsonSerializer.Deserialize<AccessTokenUserInformation>(base64Content);
+
+
+            var claims = new List<Claim>
+            {
+                //new Claim(ClaimTypes.NameIdentifier, user.nameid),
+                //new Claim(ClaimTypes.Name, user.unique_name),
+                //new Claim(ClaimTypes.Email, user.email),
+                new Claim("access_token", access_token)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(
+               claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                IssuedUtc = DateTime.UtcNow.AddHours(4)
+            };
 
             //await http context SignInAsync
             //enviar cookie el token
 
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
 
             return Redirect("~/");
         }
 
-     }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("~/");
+        }
+
+    }
 }
