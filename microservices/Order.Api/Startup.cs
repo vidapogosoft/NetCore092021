@@ -22,6 +22,7 @@ namespace Order.Api
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -54,6 +55,7 @@ namespace Order.Api
             //Query Services
             services.AddTransient<IOrderQueryService, OrderQueryService>();
 
+            
             services.AddControllers();
         }
 

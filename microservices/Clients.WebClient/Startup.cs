@@ -13,6 +13,8 @@ namespace Clients.WebClient
 {
     public class Startup
     {
+        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -32,7 +34,21 @@ namespace Clients.WebClient
             services.AddHttpClient<IProductProxy, ProductProxy>();
             services.AddHttpClient<IClientProxy, ClientProxy>();
 
-            services.AddRazorPages();
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: MyAllowSpecificOrigins,
+            //                      builder =>
+            //                      {
+            //                          builder.WithOrigins("http://localhost:51124",
+            //                              "http://localhost:51124/orders")
+            //                          .AllowAnyOrigin()
+            //                          .AllowAnyHeader()
+            //                           .AllowAnyMethod();
+            //                      });
+            //});
+
+            services.AddRazorPages(o => o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()));
+
             services.AddControllers();
 
             // Add Cookie Authentication
@@ -58,6 +74,9 @@ namespace Clients.WebClient
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //app.UseCors(MyAllowSpecificOrigins);
+
             app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
